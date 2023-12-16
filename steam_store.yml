@@ -1,0 +1,164 @@
+swagger: "2.0"
+info:
+  title: Steam API
+  version: "1.0"
+paths:
+  /dynamicstore/userdata:
+    get:
+      summary: Получение данных пользователя Steam
+      parameters:
+        - name: id
+          in: query
+          description: Steam ID пользователя
+          required: true
+          type: integer
+        - name: cc
+          in: query
+          description: Код страны для языка интерфейса
+          required: true
+          type: string
+      responses:
+        200:
+          description: Успешный ответ
+          schema:
+            type: object
+            properties:
+              rgWishlist:
+                type: array
+                items:
+                  type: integer
+                  example: [10, 500, 550]
+              rgOwnedPackages:
+                type: array
+                items:
+                  type: integer
+                  example: [36804, 54029, 41702]
+              rgOwnedApps:
+                type: array
+                items:
+                  type: integer
+                  example: [620, 730, 7670]
+              rgFollowedApps:
+                type: array
+                items:
+                  type: integer
+                  example: [1376420]
+              rgMasterSubApps:
+                type: array
+                items:
+                  type: integer
+                  example: []
+              rgPackagesInCart:
+                type: array
+                items:
+                  type: integer
+                  example: []
+              rgAppsInCart:
+                type: array
+                items:
+                  type: integer
+                  example: []
+              rgRecommendedTags:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    tagid:
+                      type: integer
+                      example: 5502
+                    name:
+                      type: string
+                      example: "Хакерство"
+              rgIgnoredApps:
+                type: array
+                items:
+                  type: integer
+                  example: []
+              rgIgnoredPackages:
+                type: array
+                items:
+                  type: integer
+                  example: []
+              rgCurators:
+                type: object
+                properties:
+                  <curator_id>:
+                    type: object
+                    properties:
+                      clanid:
+                        type: integer
+                        example: 32989758
+                      avatar:
+                        type: string
+                        example: "4f1187c11ad41f8aa58b9109efd52c2f8bca9918"
+                      name:
+                        type: string
+                        example: "CD PROJEKT RED"
+              rgCuratorsIgnored:
+                type: array
+                items:
+                  type: integer
+                  example: []
+              rgCurations:
+                type: array
+                items:
+                  type: integer
+                  example: []
+              bShowFilteredUserReviewScores:
+                type: boolean
+                example: true
+              rgCreatorsFollowed:
+                type: array
+                items:
+                  type: integer
+                  example: [32989758]
+              rgCreatorsIgnored:
+                type: array
+                items:
+                  type: integer
+                  example: []
+              rgExcludedTags:
+                type: array
+                items:
+                  type: integer
+                  example: []
+              rgExcludedContentDescriptorIDs:
+                type: array
+                items:
+                  type: integer
+                  example: []
+              rgAutoGrantApps:
+                type: array
+                items:
+                  type: integer
+                  example: []
+              rgRecommendedApps:
+                type: array
+                items:
+                  type: integer
+                  example: [1046930, 1172470]
+              rgPreferredPlatforms:
+                type: array
+                items:
+                  type: string
+                  example: "win"
+              rgPrimaryLanguage:
+                type: integer
+                example: 8
+              rgSecondaryLanguages:
+                type: array
+                items:
+                  type: integer
+                  example: []
+              bAllowAppImpressions:
+                type: boolean
+                example: true
+              nCartLineItemCount:
+                type: integer
+                example: 0
+              nRemainingCartDiscount:
+                type: integer
+                example: 0
+              nTotalCartDiscount:
+                type: integer
+                example: 0

@@ -1,0 +1,74 @@
+swagger: "2.0"
+info:
+  title: Steam API
+  version: "1.0"
+paths:
+  /inventory/stats:
+    get:
+      summary: Получение статистики предметов в инвентаре пользователя
+      parameters:
+        - name: user_id
+          in: query
+          description: Уникальный идентификатор пользователя Steam
+          required: true
+          type: integer
+        - name: game_name
+          in: query
+          description: Название игры
+          type: string
+        - name: item_type
+          in: query
+          description: Тип предмета
+          type: string
+        - name: start_date
+          in: query
+          description: Начальная дата периода (в формате YYYY-MM-DD)
+          type: string
+        - name: end_date
+          in: query
+          description: Конечная дата периода (в формате YYYY-MM-DD)
+          type: string
+      responses:
+        200:
+          description: Успешный ответ
+          schema:
+            type: object
+            properties:
+              user_id:
+                type: integer
+                example: 123456
+              start_date:
+                type: string
+                example: "2023-01-01"
+              end_date:
+                type: string
+                example: "2023-12-31"
+              total_cost:
+                type: number
+                example: 150.75
+              item_stats:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    item_name:
+                      type: string
+                      example: "AK-47"
+                    date_received:
+                      type: string
+                      example: "2023-05-15"
+                    cost:
+                      type: number
+                      example: 25.99
+                    from_game:
+                      type: string
+                      example: "Counter-Strike: Global Offensive"
+                    item_type:
+                      type: string
+                      example: "Weapon"
+        400:
+          description: Неверный запрос. Проверьте параметры запроса.
+        402:
+          description: Платеж не выполнен. Пожалуйста, выполните платеж за услугу.
+        404:
+          description: Данные не найдены. Убедитесь, что предметы указанного типа доступны в инвентаре пользователя за указанный период.

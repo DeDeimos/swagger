@@ -1,0 +1,155 @@
+swagger: "2.0"
+info:
+  title: Steam API
+  version: "1.0"
+paths:
+  /store.steampowered.com/default/home_additional:
+    get:
+      summary: Получение данных о последних обновлениях
+      parameters:
+        - name: bNeedRecommendedCurators
+          in: query
+          description: Нужны ли рекомендованные кураторы?
+          required: true
+          type: integer
+        - name: u
+          in: query
+          description: id пользователя
+          required: true
+          type: integer
+      responses:
+        200:
+          description: Успешный ответ
+          schema:
+            type: object
+            properties:
+              recent_updates:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    appid:
+                      type: string
+                      example: "252490"
+                    description:
+                      type: string
+                      example: "This month Rust celebrates its 10th birthday, join the top survival game on Steam."
+                    announcementid:
+                      type: string
+                      example: "3857959344047944568"
+              rgUserNewsFriendsPurchased:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    appid:
+                      type: integer
+                      example: 493520
+                    friends:
+                      type: array
+                      items:
+                        type: integer
+                        example: 195875160
+                    i:
+                      type: integer
+                      example: 4
+              item_data:
+                type: object
+                properties:
+                  rgApps:
+                    type: object
+                    additionalProperties:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: "Rust"
+                        url_name:
+                          type: string
+                          example: "Rust"
+                        discount_block:
+                          type: string
+                          example: "<div class=\"discount_block \" data-price-final=\"55000\" data-bundlediscount=\"0\" data-discount=\"50\"><div class=\"discount_pct\">-50%<\/div><div class=\"discount_prices\"><div class=\"discount_original_price\">1100 pуб.<\/div><div class=\"discount_final_price\">550 pуб.<\/div><\/div><\/div>"
+                        descids:
+                          type: array
+                          items:
+                            type: integer
+                            example: [1, 2, 5]
+                        headerv5:
+                          type: string
+                          example: "https:\/\/cdn.cloudflare.steamstatic.com\/steam\/apps\/252490\/header_292x136.jpg?t=1701938429"
+                        os_windows:
+                          type: boolean
+                          example: true
+                        os_macos:
+                          type: boolean
+                          example: true
+                        has_live_broadcast:
+                          type: boolean
+                          example: false
+                        discount:
+                          type: boolean
+                          example: true
+                        localized:
+                          type: boolean
+                          example: true
+                        localized_english:
+                          type: boolean
+                          example: true
+                        has_adult_content_violence:
+                          type: boolean
+                          example: true
+                        tags:
+                          type: array
+                          items:
+                            type: string
+                            example: "Бесплатная игра"
+                        tagids:
+                          type: array
+                          items:
+                            type: integer
+                            example: [113, 1718, 3859, 9, 5055]
+                  rgPackages:
+                    type: array
+                    items:
+                      type: object
+                  rgBundles:
+                    type: array
+                    items:
+                      type: object
+              account_data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    accountid:
+                      type: integer
+                      example: 202105232
+                    type:
+                      type: integer
+                      example: 1
+                    name:
+                      type: string
+                      example: "D?dekV"
+                    url:
+                      type: string
+                      example: "https:\/\/steamcommunity.com\/profiles\/76561198162370960\/"
+                    avatar:
+                      type: string
+                      example: "a41301d4b9e1d39dda8f88f1c057b74f846482c7"
+        400:
+          description: Некорректный запрос
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Invalid request. Please check your parameters."
+        404:
+          description: Данные не найдены
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "The requested resource was not found."

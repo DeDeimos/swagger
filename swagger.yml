@@ -1,0 +1,185 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: los_penguinos@masacar.com
+    name: API Support
+    url: https://vk.com/bmstu_schedule
+  description: This API was made by Crico (Rodion Tolkachev) from Los Penguinos la Mascar
+  title: Steam Catalog API
+  version: 1.0.0
+paths:
+  /api/games:
+    get:
+      summary: Get a list of available games
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  title: "Counter-Strike: Global Offensive"
+                  genre: "First-Person Shooter"
+                  price: 19.99
+                - id: 2
+                  title: "The Witcher 3: Wild Hunt"
+                  genre: "Role-Playing Game"
+                  price: 29.99
+  /api/games/{id}:
+    get:
+      summary: Get details about a specific game
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the game
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: 1
+                title: "Counter-Strike: Global Offensive"
+                genre: 
+                  - "First-Person Shooter"
+                description: "A multiplayer first-person shooter developed by Valve."
+                price: 19.99
+                release_date: "2012-08-21"
+                developer: "Valve"
+                reviews:
+                  average_rating: 4.5
+                  total_reviews: 15000
+    put:
+      summary: Update details of a specific game
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the game
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              title: "Updated Title"
+              description: "Updated description of the game."
+              price: 24.99
+      responses:
+        '200':
+          description: Successful response
+  /api/games/{id}/delete:
+    delete:
+      summary: Delete a specific game
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the game
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Successful response with no content
+  /api/developers/{developerId}:
+    get:
+      summary: Get information about a specific game developer
+      parameters:
+        - name: developerId
+          in: path
+          required: true
+          description: The ID of the developer
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: 1
+                name: Valve
+                founded_year: 1996
+                location: "Bellevue, Washington, USA"
+                description: "Valve Corporation is an American video game developer..."
+                games:
+                  - id: 1
+                    title: "Counter-Strike: Global Offensive"
+                    genre: 
+                      - "First-Person Shooter"
+                    price: 19.99
+                  - id: 4
+                    title: "Half-Life: Alyx"
+                    genre: 
+                      - "Virtual Reality" 
+                      - "Shooter"
+                    price: 59.99
+    put:
+      summary: Update details of a specific developer
+      parameters:
+        - name: developerId
+          in: path
+          required: true
+          description: The ID of developer
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+                name: Valve
+                founded_year: 1996
+                location: "Bellevue, Washington, USA"
+                description: "Valve Corporation is an American video game developer..."
+      responses:
+        '200':
+          description: Successful response
+  /api/developers/{developerId}/delete:
+    delete:
+      summary: Delete a specific developer
+      parameters:
+        - name: developerId
+          in: path
+          required: true
+          description: The ID of developer
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Successful response with no content
+  /api/developers-with-games:
+    get:
+      summary: Get a list of all game developers with their games
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  name: Valve
+                  games:
+                    - id: 1
+                      title: "Counter-Strike: Global Offensive"
+                      genre: "First-Person Shooter"
+                      price: 19.99
+                    - id: 4
+                      title: "Half-Life: Alyx"
+                      genre: 
+                        - "Virtual Reality" 
+                        - "Shooter"
+                      price: 59.99
+                - id: 2
+                  name: CD Projekt
+                  games:
+                    - id: 2
+                      title: "The Witcher 3: Wild Hunt"
+                      genre: 
+                        - "Role-Playing Game"
+                      price: 29.99
+    
