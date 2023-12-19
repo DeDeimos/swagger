@@ -17,6 +17,24 @@ paths:
           description: Код страны для языка интерфейса
           required: true
           type: string
+        - name: browserid
+          in: header
+          description: Куки - browserid
+          required: true
+          type: string
+          default: "3300639694518655967"
+        - name: steamCountry
+          in: header
+          description: Куки - steamCountry
+          required: true
+          type: string
+          default: "RU%7C467e6e7fc50c4553f6112c8d64781227"
+        - name: steamLoginSecure
+          in: header
+          description: Куки - steamLoginSecure
+          required: true
+          type: string
+          default: "76561198319663311%7C%7CeyAidHlwIjogIkpXVCIsICJhbGciOiAiRWREU0EiIH0.eyAiaXNzIjogInI6MEREMF8yM0E2NzAxQl9CRjA0NSIsICJzdWIiOiAiNzY1NjExOTgzMTk2NjMzMTEiLCAiYXVkIjogWyAid2ViIiBdLCAiZXhwIjogMTcwMjg1MzY1MywgIm5iZiI6IDE2OTQxMjY1ODMsICJpYXQiOiAxNzAyNzY2NTgzLCAianRpIjogIjBERTRfMjNBNjcwOTlfRTBBNDIiLCAib2F0IjogMTcwMjcyMzg1MCwgInJ0X2V4cCI6IDE3MjA3MjI4MzYsICJwZXIiOiAwLCAiaXBfc3ViamVjdCI6ICIxODguMzIuMjUzLjIxNiIsICJpcF9jb25maXJtZXIiOiAiMTg4LjMyLjI1My4yMTYiIH0.Kxgde6Lw5eaPW_-mYO9Gpmql_u2NjU4Ek5G1RVVhXCZzLSZyL5kcZSnb6ZjDPpy8OV7LvZK_Gr4CI4xuIuykAw"
       responses:
         200:
           description: Успешный ответ

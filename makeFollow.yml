@@ -1,0 +1,82 @@
+openapi: 3.0.0
+info:
+  title: Steam API
+  description: API для взаимодействия с Steam
+  version: 1.0.0
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: COOKIE-NAME  # replace with your cookie name
+paths:
+  /explore/followgame:
+    post:
+      summary: Подписаться/отписаться от игры
+      security:
+        - cookieAuth: []  # Use the security scheme defined above
+      parameters:
+        - name: BrowserID
+          in: header
+          description: Browser ID куки пользователя
+          required: true
+          schema:
+            type: string
+            example: "3300639694518655967"
+        - name: SteamCountry
+          in: header
+          description: Steam Country куки пользователя
+          required: true
+          schema:
+            type: string
+            example: "RU%7C467e6e7fc50c4553f6112c8d64781227"
+        - name: SteamLoginSecure
+          in: header
+          description: Steam Login Secure куки пользователя
+          required: true
+          schema:
+            type: string
+            example: "76561198319663311%7C%7CeyAidHlwIjogIkpXVCIsICJhbGciOiAiRWREU0EiIH0.eyAiaXNzIjogInI6MEREMF8yM0E2NzAxQl9CRjA0NSIsICJzdWIiOiAiNzY1NjExOTgzMTk2NjMzMTEiLCAiYXVkIjogWyAid2ViIiBdLCAiZXhwIjogMTcwMjg1MzY1MywgIm5iZiI6IDE2OTQxMjY1ODMsICJpYXQiOiAxNzAyNzY2NTgzLCAianRpIjogIjBERTRfMjNBNjcwOTlfRTBBNDIiLCAib2F0IjogMTcwMjcyMzg1MCwgInJ0X2V4cCI6IDE3MjA3MjI4MzYsICJwZXIiOiAwLCAiaXBfc3ViamVjdCI6ICIxODguMzIuMjUzLjIxNiIsICJpcF9jb25maXJtZXIiOiAiMTg4LjMyLjI1My4yMTYiIH0.Kxgde6Lw5eaPW_-mYO9Gpmql_u2NjU4Ek5G1RVVhXCZzLSZyL5kcZSnb6ZjDPpy8OV7LvZK_Gr4CI4xuIuykAw"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sessionid:
+                  type: string
+                  description: Идентификатор сессии пользователя
+                appid:
+                  type: integer
+                  description: Идентификатор приложения (игры)
+                unfollow:
+                  type: integer
+                  enum: [1]
+                  description: Флаг отписки. Указывается, если нужно отписаться
+
+      responses:
+        '200':
+          description: Успешный запрос
+          content:
+            application/json:
+              example:
+                true
+        '400':
+          description: Неверный запрос
+          content:
+            application/json:
+              example:
+                null
+        '401':
+          description: Неавторизованный запрос
+          content:
+            application/json:
+              example:
+                null
+        '500':
+          description: Повторный запрос
+          content:
+            application/json:
+              example:
+                false
